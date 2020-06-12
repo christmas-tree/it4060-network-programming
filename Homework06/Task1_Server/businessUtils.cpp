@@ -498,8 +498,8 @@ void run() {
 			// to create new thread
 			WaitForMultipleObjects(threadCount, threadStatus, true, INFINITE);
 			threadCount++;
-			_beginthreadex(0, 0, procThread, (void*)&threadCount, 0, 0);
 			threadStatus[threadCount - 1] = CreateMutex(NULL, false, NULL);
+			_beginthreadex(0, 0, procThread, (void*)&threadCount, 0, 0);
 
 			// Release threads' mutexes
 			for (int i = 0; i < threadCount; i++) {

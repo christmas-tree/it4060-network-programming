@@ -1,1 +1,9 @@
-﻿
+﻿  stdafx.cpp
+  uiUtils.cpp
+  Task2_Client.cpp
+  ioUtils.cpp
+d:\hust\20192\it4060 lap trinh mang\hw\homework05\task2_client\ioutils.cpp(228): warning C4309: 'initializing': truncation of constant value
+  businessUtils.cpp
+  Generating Code...
+  Task2_Client.vcxproj -> D:\HUST\20192\IT4060 Lap trinh mang\HW\Homework05\Debug\Task2_Client.exe
+  Task2_Client.vcxproj -> D:\HUST\20192\IT4060 Lap trinh mang\HW\Homework05\Debug\Task2_Client.pdb (Full PDB)
