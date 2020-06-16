@@ -154,6 +154,11 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
+/*
+Main function for worker thread. Process network IO operations. Once it receives
+a request, it puts the request into the processQueue.
+[IN] completionPortID:	the ID of the completion port initiated.
+*/
 unsigned __stdcall serverWorkerThread(LPVOID completionPortID)
 {
 	HANDLE completionPort = (HANDLE)completionPortID;
@@ -182,6 +187,7 @@ unsigned __stdcall serverWorkerThread(LPVOID completionPortID)
 				ReleaseSemaphore(ioQueueEmpty, 1, NULL);
 				return 0;
 			}
+			disconnect(perHandleData->socket);
 			GlobalFree(perHandleData);
 			GlobalFree(perIoData);
 
@@ -208,7 +214,7 @@ unsigned __stdcall serverWorkerThread(LPVOID completionPortID)
 				perIoData->dataBuff.len = perIoData->intendedLength - perIoData->recvBytes;
 
 				if (WSARecv(perHandleData->socket, &(perIoData->dataBuff), 1, &transferredBytes,
-					0, &(perIoData->overlapped), NULL) == SOCKET_ERROR) {
+					&flags, &(perIoData->overlapped), NULL) == SOCKET_ERROR) {
 					if (WSAGetLastError() != ERROR_IO_PENDING) {
 						printf("Error %d! WSARecv() failed.\n", WSAGetLastError());
 						return 0;
@@ -270,6 +276,11 @@ unsigned __stdcall serverWorkerThread(LPVOID completionPortID)
 	}
 }
 
+/*
+Main function for request processing thread. Dequeues the process queue
+and call processing functions.
+[IN] none - not used.
+*/
 unsigned __stdcall serverBusinessThread(LPVOID none)
 {
 	DWORD transferredBytes;

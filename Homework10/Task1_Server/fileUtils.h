@@ -56,10 +56,6 @@ FILE* f;
 char* fName;
 char filebuff[BUFSIZE];
 
-/***********************************
-/            FILES UTILS           /
-***********************************/
-
 /*
 Open file and store file name in a global variable. If file does not exists,
 create new file. Return 0 if succeed, else return an error code.

@@ -49,7 +49,7 @@ typedef struct {
 } PER_QUEUE_ITEM;
 
 /*
-Prepare data. Return 0 if successful, return value > 0 if fail
+Function prepares data. Return 0 if successful, return value > 0 if fail
 */
 int initData() {
 	return openFile("account.txt") + readUserF(accountList);
@@ -85,7 +85,7 @@ void genSid(char* sid) {
 Find an account in accountList by username, return pointer to account
 if account found, return NULL if cannot find.
 [IN] username:	a char array that contains the username
-to be looked up in accountList
+				to be looked up in accountList
 */
 Account* findAccount(char* username) {
 	for (std::list<Account>::iterator it = accountList.begin(); it != accountList.end(); it++) {
@@ -382,7 +382,7 @@ int extractSid(char* buff, char* sid, int &i) {
 Extract command from request and call corresponding process function
 [IN] sock:		the socket that's sending the request
 [IN/OUT] buff:	a char array which contains the request, and stores response
-after the request has been processed
+				after the request has been processed
 */
 void parseRequest(SOCKET sock, char* buff) {
 	char command[20];
